@@ -77,6 +77,7 @@
                         <div><a style="font-size: 20px;text-decoration: none" :href=" '/chat/' + i['id']" target="_blank">[[ i['jobName'] ]]</a>
                         </div>
                         <div>
+<<<<<<< HEAD
                             <a style="color: #708090;font-size: 13px">[[ i['degreeName'] ]]|</a>
                             <a style="color: #ffac3b;font-size: 13px">[[ i['lowMonthPay'] ]]-[[ i['highMonthPay']
                                 ]]K/月</a>
@@ -87,6 +88,18 @@
                         </div>
                         <div>
                             <a v-if="i['recTags'] != 'null' " style="color: #708090;font-size: 12px">[[ i['recTags'] ]]</a>
+=======
+                            <a style="color: #b6b4b2;font-size: 12px">[[ i['degreeName'] ]]</a>
+                            <a style="color: #ffac3b;font-size: 12px">[[ i['lowMonthPay'] ]]-[[ i['highMonthPay']
+                                ]]/月</a>
+                        </div>
+                        <div>
+                            <a style="color: #b6b4b2;font-size: 12px">[[ i['areaCodeName'] ]]</a>
+                            <a style="color: #b6b4b2;font-size: 12px">[[ i['major'] ]]</a>
+                        </div>
+                        <div>
+                            <a v-if="i['recTags'] != 'null' " style="color: #b6b4b2;font-size: 12px">[[ i['recTags'] ]]</a>
+>>>>>>> 576f25c44d1790e9362898a273b80804182912d3
                         </div>
                     </div>
 
@@ -184,8 +197,13 @@
                     value: '1-10',
                     label: '1-10'
                 }, {
+<<<<<<< HEAD
                     value: '11-20',
                     label: '11-20'
+=======
+                    value: '1-20',
+                    label: '1-20'
+>>>>>>> 576f25c44d1790e9362898a273b80804182912d3
                 }],
 
 

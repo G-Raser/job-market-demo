@@ -91,13 +91,22 @@ def index():
         # 单独工资 单独地区
         if di_qu != '地区(不限)' and gong_zi != '月薪(不限)':
             len_number = int(
+<<<<<<< HEAD
                 int(len(db_session.query(Jobs).filter(gongzi_qian <= Jobs.highMonthPay).filter(
                     gongzi_ho >= Jobs.highMonthPay).filter(Jobs.areaCodeName == di_qu).all())) / 10) + 2# 一页十条信息
+=======
+                int(len(db_session.query(Jobs).filter(gongzi_qian <= Jobs.lowMonthPay).filter(
+                    gongzi_ho >= Jobs.highMonthPay).filter(Jobs.areaCodeName == di_qu).all())) / 10) + 2
+>>>>>>> 576f25c44d1790e9362898a273b80804182912d3
             number_list = []
             for i in range(1, len_number):
                 number_list.append(i)
 
+<<<<<<< HEAD
             infos = db_session.query(Jobs).filter(gongzi_qian <= Jobs.highMonthPay).filter(
+=======
+            infos = db_session.query(Jobs).filter(gongzi_qian <= Jobs.lowMonthPay).filter(
+>>>>>>> 576f25c44d1790e9362898a273b80804182912d3
                 gongzi_ho >= Jobs.highMonthPay).filter(Jobs.areaCodeName == di_qu).all()
             db_session.commit()
             db_session.close()
@@ -126,13 +135,21 @@ def index():
         # 单独工资
         if di_qu == '地区(不限)' and gong_zi != '月薪(不限)':
             len_number = int(
+<<<<<<< HEAD
                 int(len(db_session.query(Jobs).filter(gongzi_qian <= Jobs.highMonthPay).filter(
+=======
+                int(len(db_session.query(Jobs).filter(gongzi_qian <= Jobs.lowMonthPay).filter(
+>>>>>>> 576f25c44d1790e9362898a273b80804182912d3
                     gongzi_ho >= Jobs.highMonthPay).all())) / 10) + 2
             number_list = []
             for i in range(1, len_number):
                 number_list.append(i)
 
+<<<<<<< HEAD
             infos = db_session.query(Jobs).filter(gongzi_qian <= Jobs.highMonthPay).filter(
+=======
+            infos = db_session.query(Jobs).filter(gongzi_qian <= Jobs.lowMonthPay).filter(
+>>>>>>> 576f25c44d1790e9362898a273b80804182912d3
                 gongzi_ho >= Jobs.highMonthPay).all()
             db_session.commit()
             db_session.close()
@@ -160,7 +177,11 @@ def index():
 
         # 单独地区
         if di_qu != '地区(不限)' and gong_zi == '月薪(不限)':
+<<<<<<< HEAD
             len_number = int(int(len(db_session.query(Jobs).filter(Jobs.areaCodeName == di_qu).all())) / 10) + 2 # 一页十条信息
+=======
+            len_number = int(int(len(db_session.query(Jobs).filter(Jobs.areaCodeName == di_qu).all())) / 10) + 2
+>>>>>>> 576f25c44d1790e9362898a273b80804182912d3
             number_list = []
             for i in range(1, len_number):
                 number_list.append(i)
