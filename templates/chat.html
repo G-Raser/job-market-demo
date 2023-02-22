@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <!-- 导入Vue-->
+    <script type="text/javascript" src="../static/vue/vue.min.js"></script>
+    <!-- 导入Axios-->
+    <script type="text/javascript" src="../static/axios/axios.min.js"></script>
+    <!-- element-->
+    <script type="text/javascript" src="../static/element/index.js"></script>
+    <link rel="stylesheet" href="../static/element/index.css">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+</head>
+<body style="background-color: #efeff4">
+<div id="app">
+
+
+    <div style="width: 1000px;margin:0 auto;">
+        <div style="padding: 20px 20px 0 20px">
+            <el-menu style="background-color: white;box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);border-radius: 6px;"
+                     class="el-menu-demo" mode="horizontal">
+                <el-menu-item><a style="font-size: 25px">就业服务平台</a></el-menu-item>
+
+            </el-menu>
+        </div>
+
+
+        <div style="padding: 20px 20px 0 20px;">
+            <div style="background-color: white;box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);border-radius: 6px">
+                <div>
+                    <div style="padding: 50px 50px 50px 50px;display: inline-block;vertical-align: top;width: 30%">
+                        <div >
+                            <a style="font-size: 25px;">{{ infos['jobName'] }}</a>
+                        </div>
+                        <div style="padding: 0 0 20px 0">
+                            <a style="color: #686663;font-size: 16px">全职--{{ infos['areaCodeName'] }}&nbsp{{ infos['jobName'] }}<br/>月薪{{ infos['lowMonthPay'] }}-{{ infos['highMonthPay']}}(k/month)</a>
+                        </div>
+
+                        <div>
+                            <a style="color: #686663;font-size: 16px">
+                                {{ infos['degreeName'] }}{{ infos['lowMonthPay'] }}-{{ infos['highMonthPay'] }}</a>
+                        </div>
+                        <div>
+                            <a style="color: #686663;font-size: 16px">招聘{{ infos['headCount'] }}人</a>
+                        </div>
+                        <div>
+                            <a style="color: #686663;font-size: 16px"> {{ infos['major'] }}</a>
+                        </div>
+                    </div>
+
+                    <div style="padding: 50px 0 0px 0;display: inline-block;vertical-align: top;margin: 0 0 0 300px ">
+                        <img style="border-radius: 10px;box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.5);width: 200px;"
+                             src="{{ infos['recLogo'] }}">
+                    </div>
+                </div>
+
+                <div>
+                    <div style="padding: 50px 50px 50px 50px;display: inline-block;vertical-align: top;">
+                        <a style="color: #686663;font-size: 16px"> {{ infos['recName'] }}</a>
+                    </div>
+                    <div style="padding: 50px 50px 50px 50px;display: inline-block;vertical-align: top;">
+                        <a style="color: #686663;font-size: 16px"> {{ infos['recProperty'] }}</a>
+                    </div>
+                    <div style="padding: 50px 50px 50px 50px;display: inline-block;vertical-align: top;">
+                        <a style="color: #686663;font-size: 16px"> {{ infos['recScale'] }}</a>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <div style="padding: 20px 20px 0 20px;">
+            <div style="background-color: white;box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);border-radius: 6px">
+
+                <div style="padding: 50px 50px 50px 50px;">
+                    <div style="padding: 0 0 20px 0">
+                        <a style="font-size: 25px;">公司信息</a>
+                    </div>
+                    <div>
+                        <a style="color: #686663;font-size: 16px"> {{ infos['recName'] }}</a>
+                    </div>
+                    <div>
+                        <a style="color: #686663;font-size: 16px"> {{ infos['recProperty'] }}</a>
+                    </div>
+                    <div>
+                        <a style="color: #686663;font-size: 16px"> {{ infos['recScale'] }}</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div style="padding: 20px 20px 0 20px;">
+            <div style="background-color: white;box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);border-radius: 6px">
+
+                <div style="padding: 50px 50px 50px 50px;">
+                    <div style="padding: 0 0 20px 0">
+                        <a style="font-size: 25px;">职业详情</a>
+                    </div>
+                    <div>
+                        <a style="color: #686663;font-size: 16px">
+
+                            {% if infos['recTags'] == 'null' %}
+                                <a>暂无</a>
+                            {% endif %}
+                            {% if infos['recTags'] != 'null' %}
+                                {{ infos['recTags'] }}
+                            {% endif %}
+
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        delimiters: ["[[", "]]"],
+        data() {
+            return {}
+        },
+    })
+
+
+</script>
+
+</body>
+</html>

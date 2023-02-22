@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <!-- 导入Vue-->
+    <script type="text/javascript" src="../static/vue/vue.min.js"></script>
+    <!-- 导入Axios-->
+    <script type="text/javascript" src="../static/axios/axios.min.js"></script>
+    <!-- element-->
+    <script type="text/javascript" src="../static/element/index.js"></script>
+    <link rel="stylesheet" href="../static/element/index.css">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+</head>
+<body style="background-color: #efeff4">
+<div id="app">
+
+    <div style="padding: 20px 20px 0 20px">
+        <el-menu style="background-color: white;box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);border-radius: 6px;"
+                 class="el-menu-demo" mode="horizontal">
+            <el-menu-item><a style="font-size: 25px">就业服务平台</a></el-menu-item>
+
+        </el-menu>
+    </div>
+
+
+    <div style="padding: 20px 20px 20px 20px;">
+        <div style="background-color: white;box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);border-radius: 6px">
+
+            <div style="padding: 50px 0 0 70px">
+
+                <a>筛选:&nbsp</a>
+
+                <el-select v-model="di_qu">
+                    <el-option
+                            v-for="item in diqu_options"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                    </el-option>
+                </el-select>
+
+                <el-select v-model="gong_zi">
+                    <el-option
+                            v-for="item in gongzi_options"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                    </el-option>
+                </el-select>
+
+
+                <div style="display: inline-block;width: 250px;padding: 0 0 0 100px">
+                    <el-input v-model="input_chaxun" placeholder="请输入名称"></el-input>
+                </div>
+
+                <div style="display: inline-block;width: 100px">
+                    <el-button v-on:click="chaxun" type="primary">查询</el-button>
+                </div>
+
+
+            </div>
+
+
+            <div style="padding: 0 0 0 0"></div>
+            <div v-for="i in infos" style="padding: 0 20px 0 20px ">
+                <hr style="border : 1px dashed #ebebeb;"/>
+                <div style="padding: 20px 50px 0 50px;">
+                    <div style="display: inline-block;width: 100px">
+                        <img style="border-radius: 10px;box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.5);width: 100px;"
+                             :src="[[ i['recLogo'] ]]">
+                    </div>
+
+                    <div style="display: inline-block;vertical-align: top;margin: 0 0 0 50px;width: 50%">
+                        <div><a style="font-size: 20px;text-decoration: none" :href=" '/chat/' + i['id']" target="_blank">[[ i['jobName'] ]]</a>
+                        </div>
+                        <div>
+                            <a style="color: #708090;font-size: 13px">[[ i['degreeName'] ]]|</a>
+                            <a style="color: #ffac3b;font-size: 13px">[[ i['lowMonthPay'] ]]-[[ i['highMonthPay']
+                                ]]K/月</a>
+                        </div>
+                        <div>
+                            <a style="color: #708090;font-size: 13px">[[ i['areaCodeName'] ]]|</a>
+                            <a style="color: #708090;font-size: 13px">[[ i['major'] ]]</a>
+                        </div>
+                        <div>
+                            <a v-if="i['recTags'] != 'null' " style="color: #708090;font-size: 12px">[[ i['recTags'] ]]</a>
+                        </div>
+                    </div>
+
+                    <div style="display: inline-block;vertical-align: top; margin: 0 0 0 100px">
+                        <div>
+                            <a style="color: #686663;font-size: 18px">[[ i['recName'] ]]</a>
+                        </div>
+
+                        <div>
+                            <a style="color: #686663;font-size: 12px">[[ i['recProperty'] ]]</a>
+
+                        </div>
+
+                        <div>
+                            <a style="color: #686663;font-size: 12px">公司规模[[ i['recScale'] ]]</a>
+
+                        </div>
+
+                        <div>
+                            <a style="color: #686663;font-size: 12px">招聘[[ i['headCount'] ]]人</a>
+
+                        </div>
+
+                        <div>
+                            <a style="color: #686663;font-size: 12px">[[ i['publishDate'] ]]</a>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div style="padding: 50px 0 0 0"></div>
+
+
+            <div style="padding: 20px 0 20px 0; " align="center">
+                <el-radio-group v-model="number">
+                    <el-radio-button v-for="i in number_list" :label="i"></el-radio-button>
+                </el-radio-group>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        delimiters: ["[[", "]]"],
+        data() {
+            return {
+                infos: '',
+                number: 1,
+                number_list: '',
+                input_chaxun: '',
+                di_qu: '地区(不限)', gong_zi: '月薪(不限)',
+                diqu_options: [{
+                    value: '地区(不限)',
+                    label: '地区(不限)'
+                }, {
+                    value: '重庆',
+                    label: '重庆'
+                }, {
+                    value: '江苏',
+                    label: '江苏'
+                }, {
+                    value: '四川',
+                    label: '四川'
+                }, {
+                    value: '湖北',
+                    label: '湖北'
+                }, {
+                    value: '山东',
+                    label: '山东'
+                }, {
+                    value: '浙江',
+                    label: '浙江'
+                }, {
+                    value: '上海',
+                    label: '上海'
+                }, {
+                    value: '陕西',
+                    label: '陕西'
+                }],
+
+                gongzi_options: [{
+                    value: '月薪(不限)',
+                    label: '月薪(不限)'
+                }, {
+                    value: '1-10',
+                    label: '1-10'
+                }, {
+                    value: '11-20',
+                    label: '11-20'
+                }],
+
+
+            }
+        },
+        mounted() {
+            axios.post('/', {
+                'number': this.number,
+                'di_qu': this.di_qu,
+                'gong_zi': this.gong_zi,
+            })
+                .then(res => {
+                    this.number_list = res.data['number_list']
+                    this.infos = res.data['infos']
+                })
+                .catch(err => {
+                    console.log(err)
+                    alert('网络传输失败')
+                })
+
+
+        },
+        watch: {
+            number() {
+                this.input_chaxun = ''
+                axios.post('/', {
+                    'number': this.number,
+                    'di_qu': this.di_qu,
+                    'gong_zi': this.gong_zi,
+                })
+                    .then(res => {
+
+                        this.number_list = res.data['number_list']
+                        this.infos = res.data['infos']
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        alert('网络传输失败')
+                    })
+            },
+            di_qu() {
+                this.input_chaxun = ''
+                axios.post('/', {
+                    'number': 1,
+                    'di_qu': this.di_qu,
+                    'gong_zi': this.gong_zi,
+                })
+                    .then(res => {
+
+                        this.number_list = res.data['number_list']
+                        this.infos = res.data['infos']
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        alert('网络传输失败')
+                    })
+            },
+            gong_zi() {
+                this.input_chaxun = ''
+                axios.post('/', {
+                    'number': 1,
+                    'di_qu': this.di_qu,
+                    'gong_zi': this.gong_zi,
+                })
+                    .then(res => {
+                        this.number_list = res.data['number_list']
+                        this.infos = res.data['infos']
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        alert('网络传输失败')
+                    })
+            },
+        },
+
+
+        methods: {
+            chaxun() {
+                axios.post('/', {
+                    'input_chaxun': this.input_chaxun,
+                })
+                    .then(res => {
+                        this.number_list = res.data['number_list']
+                        this.infos = res.data['infos']
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        alert('查询失败')
+                    })
+            },
+        },
+
+    })
+
+
+</script>
+</body>
+</html>
